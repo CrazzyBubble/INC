@@ -2,8 +2,6 @@
     padding: 0;
     margin: 0;
     color: #ddd;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
 }
 
 *:focus {
@@ -12,6 +10,8 @@
 
 body {
     background: rgb(6, 10, 16);
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
 }
 
 div {
@@ -162,7 +162,7 @@ li {
 }
 
 .menu_sort_search {
-    font-family: 'Long Cang', cursive;
+    /* font-family: 'Roboto', cursive; */
     font-style: italic;
 }
 
@@ -198,7 +198,7 @@ li {
 }
 
 .search_film_image {
-    background-color: red;
+    background-color: white;
     border-color: white;
     padding: 1px;
     width: 8em;
@@ -219,7 +219,7 @@ li {
 .video_player_container {
     width: 100%;
     height: 550px;
-    border: 1px white solid;
+    /* border: 1px white solid; */
     justify-content: center;
 }
 
@@ -227,18 +227,68 @@ li {
     height: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
-    border: 1px red solid;
+    /* border: 1px red solid; */
 }
 
 .text_container {
-    padding-top: 10px;
+    margin-top: 10px;
+    border: 1px white solid;
+    float: left;
+    padding: 10px 25px;
 }
 
 .image_info {
-    background: #ffffff url("../images/photo.PNG");
-    background-repeat: space;
+    background: #ffffff/*url("../images/photo.PNG")*/
+    ;
+    background-repeat: no-repeat;
     width: 8em;
-    height: 12em;
+    height: 8em;
     float: left;
     margin-right: 10px;
+}
+
+.film_name,
+.comment_request {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.film_info_list {
+    line-height: 1.5;
+    font-size: 14px;
+    text-align: justify;
+}
+
+.film_characteristic_name {
+    font-weight: 500;
+}
+
+.film_characteristic_info {
+    font-weight: 200;
+}
+
+.comments_container {
+    margin-top: 10px;
+    border: 1px white solid;
+    float: left;
+    padding: 10px 25px;
+}
+
+.user_image_info {
+    background: url("https://avatanplus.com/files/resources/original/5dfb84a5b585716f1e7e2770.png") #fff center;
+    width: 42px;
+    height: 42px;
+    /* border: 2px rgba(0, 250, 250, 0.4) inset; */
+    border-radius: 25%;
+    background-size: contain;
+    background-origin: border-box;
+    float: left;
+    margin-right: 10px;
+}
+
+.form_text {
+    color: black;
 }
