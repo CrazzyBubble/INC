@@ -15,10 +15,14 @@ namespace INCWebServer.Sources
         {
             films = new List<FilmInfoPromo>();
         }
-        public void addFilm(FilmInfoPromo film)
+        public bool addFilm(FilmInfoPromo film)
         {
             if (films.Count < 5)
+            {
                 films.Add(film);
+                return true;
+            }
+            return false;
         }
     }
 }
