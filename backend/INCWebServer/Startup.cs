@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using INCWebServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,10 +23,13 @@ namespace INCWebServer
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<LoginPageService>();
+            services.AddSingleton<SearchPageService>();
+            services.AddSingleton<ViewPageService>();
+            services.AddDbContext<INCServer.Context.incContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

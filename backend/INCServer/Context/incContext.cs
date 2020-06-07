@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace INCServer
+namespace INCServer.Context
 {
     public partial class incContext : DbContext
     {
