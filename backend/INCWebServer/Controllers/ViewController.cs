@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using INCWebServer.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,5 +13,10 @@ namespace INCWebServer.Controllers
     [Route("[controller]")]
     public class ViewController : ControllerBase
     {
+        ViewPageService service;
+        public ViewController(ViewPageService service)
+        {
+            this.service = service;
+        }
     }
 }

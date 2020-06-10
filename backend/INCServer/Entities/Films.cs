@@ -18,6 +18,7 @@ namespace INCServer
         public short? Countryid { get; set; }
         public string[] Tags { get; set; }
         public string Description { get; set; }
+        public string ImageSrc { get; set; }
 
         public virtual Categories Categories { get; set; }
         public virtual Countries Country { get; set; }

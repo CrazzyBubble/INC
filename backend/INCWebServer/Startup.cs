@@ -26,9 +26,9 @@ namespace INCWebServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<LoginPageService>();
-            services.AddSingleton<SearchPageService>();
-            services.AddSingleton<ViewPageService>();
+            services.AddScoped<LoginPageService>();
+            services.AddScoped<SearchPageService>();
+            services.AddScoped<ViewPageService>();
             services.AddDbContext<INCServer.Context.incContext>();
         }
 

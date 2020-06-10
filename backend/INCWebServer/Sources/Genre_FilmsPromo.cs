@@ -15,6 +15,11 @@ namespace INCWebServer.Sources
         {
             films = new List<FilmInfoPromo>();
         }
+        public Genre_FilmsPromo(string genre, List<FilmInfoPromo> films)
+        {
+            GenreName = genre;
+            this.films = films;
+        }
         public bool addFilm(FilmInfoPromo film)
         {
             if (films.Count < 5)

@@ -5,7 +5,7 @@ namespace INCServer
 {
     public partial class FilmResources
     {
-        public int? Filmid { get; set; }
+        public int Filmid { get; set; }
         public string Src { get; set; }
         public short? Formatid { get; set; }
 

@@ -1,0 +1,25 @@
+GET https://localhost:44356/search
+
+###
+
+GET https://localhost:44356/search/1
+
+###
+
+GET https://localhost:44356/search/film=26.04
+
+###
+
+GET https://localhost:44356/search/genre=music
+
+###
+
+GET https://localhost:44356/search/sorted_by_popularity
+
+###
+
+GET https://localhost:44356/search/sorted_by_rating
+
+###
+
+GET https://localhost:44356/search/sorted_by_release

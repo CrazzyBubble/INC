@@ -179,6 +179,10 @@ namespace INCServer.Context
                     .HasColumnName("tags")
                     .HasColumnType("character varying(15)[]");
 
+                entity.Property(e => e.ImageSrc)
+                    .HasColumnName("imagesrc")
+                    .HasColumnType("character varying(255)");
+
                 entity.HasOne(d => d.Categories)
                     .WithMany(p => p.Films)
                     .HasForeignKey(d => d.Categoriesid)
@@ -238,10 +242,6 @@ namespace INCServer.Context
                 entity.ToTable("photos");
 
                 entity.Property(e => e.Filmid).HasColumnName("filmid");
-
-                entity.Property(e => e.Istitul)
-                    .HasColumnName("istitul")
-                    .HasDefaultValueSql("false");
 
                 entity.Property(e => e.Src)
                     .IsRequired()
