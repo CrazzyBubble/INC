@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 *:focus {
@@ -12,6 +13,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     color: #ddd;
+    height: fit-content;
 }
 
 div {
@@ -37,6 +39,7 @@ li {
 
 .container {
     max-width: 1270px;
+    height: fit-content;
     margin: 0 auto;
 }
 
@@ -151,11 +154,13 @@ li {
 .content {
     padding-top: 75px;
     min-height: 768px;
+    height: fit-content;
     background: transparent;
 }
 
 .hidden {
     visibility: hidden;
+    display: none;
 }
 
 .bottom-border {
@@ -234,6 +239,7 @@ li {
 }
 
 .text_container {
+    box-sizing: border-box;
     margin-top: 10px;
     border: 1px white solid;
     float: left;
@@ -299,6 +305,7 @@ li {
     padding: 5px 0 5px 5px;
     height: 5em;
     resize: none;
+    border-radius: 10px;
 }
 
 .button-publish-comment {
@@ -331,4 +338,34 @@ li {
     min-height: 100px;
     padding-top: 20px;
     border-bottom: 1px #fff solid;
+}
+
+.rating_selector {
+    background: none;
+    color: white;
+    /* decoration */
+    border: none;
+    border-radius: 5px;
+    animation: none;
+    border-bottom: 1px #26c2c7 solid;
+}
+
+.selector_style {
+    background: black;
+    color: white;
+}
+
+.image_like {
+    color: #ccc;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+
+/* .image_like:hover {
+    color: #26c2c7;
+} */
+
+.on {
+    color: red;
 }

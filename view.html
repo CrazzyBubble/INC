@@ -24,7 +24,7 @@
             <div class="shell-search">
                 <form class="search">
                     <input type="search" class="field-search"></input>
-                    <button type="submit" class="button-search"></input>
+                    <button type="submit" class="button-search"></button>
                 </form>
             </div>
             <div class="menu__top">
@@ -54,54 +54,6 @@
                         <li>
                             <a href="#" class="effect-shadow">Animation</a>
                         </li>
-                        <li>
-                            <a href="#" class="effect-shadow">Biography</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Blockbuster</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Comedy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Documentary</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Drama</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Family</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Fantastic film</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Fantasy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Horror</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Musical</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Post-apocalyptic</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Romance comedy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Science fiction</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Short film</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">War</a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-text">Western</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -113,34 +65,41 @@
                 <video class="video_player" controls="controls" poster="images/photo1.png">
                     <source src="Films/movie.mp4" type="video/mp4">
                 Ваш браузер не поддерживает video.
+                    </source>
                 </video>
             </div>
             <div class="text_container">
-                <div class="film_name">Namemememememme    memememe</div>
+                <div class="flex-center">
+                    <div class="film_name">Namemememememme memememe</div>
+                    <i class="fa fa-heart image_like" aria-hidden="true"></i>
+                    <select class="rating_selector">
+                        <option class="selector_style">Rate</option>
+                    </select>
+                </div>
                 <div class="image_info"></div>
                 <ul class="film_info_list">
                     <li>
-                        <span class="film_characteristic_name">Genre</span> 
+                        <span class="film_characteristic_name">Genre</span>
                         <span>:</span>
                         <span class="film_characteristic_info">Tragedy</span>
                     </li>
                     <li class="">
-                        <span class="film_characteristic_name">Duration</span> 
+                        <span class="film_characteristic_name">Duration</span>
                         <span>:</span>
                         <span class="film_characteristic_info">180 min</span>
                     </li>
                     <li>
-                        <span class="film_characteristic_name">Year</span> 
+                        <span class="film_characteristic_name">Year</span>
                         <span>:</span>
                         <span class="film_characteristic_info">1999</span>
                     </li>
                     <li>
-                        <span class="film_characteristic_name">Creators</span> 
+                        <span class="film_characteristic_name">Creators</span>
                         <span>:</span>
                         <span class="film_characteristic_info">Dyadya Vasya</span>
                     </li>
                     <li>
-                        <span class="film_characteristic_name">Description</span> 
+                        <span class="film_characteristic_name">Description</span>
                         <span>:</span>
                         <span class="film_characteristic_info">С 1991 по 1996 годы, во время грузино-абхазской войны 1992—1993 годов — депутат Верховного Совета — парламента Республики Абхазия; в 1993—1994 годах — первый заместитель председателя Верховного Совета Абхазии, а в 1994—1996 годах — первый Вице-спикер парламента. Один из ближайших сподвижников Владислава Ардзинбы[5].
 
@@ -170,7 +129,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="comments_container">
+            <div class="comments_container hidden">
                 <div class="comment_request">Comments</div>
                 <div class="comment-field flex-center">
                     <div class="user_image_info"></div>
@@ -178,23 +137,23 @@
                         <textarea cols="10" rows="3"></textarea>
                     </div>
                     <button class="button-publish-comment">Publish</button>
+                </div>
+                <ul class="comments_under_video">
+                    <li>
+                        <div class="user_image_info"></div>
+                        <span class="comment_text">Nice film, maybe it`s 9/10.</span>
+                    </li>
+                    <li>
+                        <div class="user_image_info"></div>
+                        <span class="comment_text">Nice film, maybe it`s 9/10.</span>
+                    </li>
+                    <li>
+                        <div class="user_image_info"></div>
+                        <span class="comment_text">Nice film, maybe it`s 9/10.</span>
+                    </li>
+                </ul>
             </div>
-            <ul class="comments_under_video">
-                <li>
-                    <div class="user_image_info"></div>
-                    <span class="comment_text">Nice film, maybe it`s 9/10.</span>
-                </li>
-                <li>
-                    <div class="user_image_info"></div>
-                    <span class="comment_text">Nice film, maybe it`s 9/10.</span>
-                </li>
-                <li>
-                    <div class="user_image_info"></div>
-                    <span class="comment_text">Nice film, maybe it`s 9/10.</span>
-                </li>
-            </ul>
         </div>
-    </div>
     </section>
     <script src="js/script.js"></script>
 </body>
