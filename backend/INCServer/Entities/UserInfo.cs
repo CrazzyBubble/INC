@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Npgsql.TypeHandlers.NumericHandlers;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
 
 namespace INCServer
 {
@@ -20,6 +17,7 @@ namespace INCServer
         public string Imgsrc { get; set; }
         [JsonProperty("money")]
         public decimal Money { get; set; }
+        [JsonIgnore]
         public virtual User User { get; set; }
     }
 }

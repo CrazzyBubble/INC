@@ -1,7 +1,6 @@
 ﻿using INCServer;
 using INCServer.Context;
-using INCWebServer.Sources;
-using Microsoft.AspNetCore.SignalR;
+using INCWebServer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -67,13 +66,46 @@ namespace INCWebServer.Services
 
         public bool SetWatched(int userid, int filmid)
         {
-            var f = (from w1 in db.Watched
+            /*var cw = (from w1 in db.Watched
                      where w1.Filmid == filmid && w1.Userid == userid
                      select w1).Count();
-            if (f > 0)
-                return false;
+            if (cw > 0)
+                return false;*/
             Watched w = new Watched { Userid = userid, Filmid = filmid };
-            db.Watched.Add(w);
+            try
+            {
+                db.Watched.Add(w);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetWatchTrue(int userid, int filmid)
+        {
+            var w = (from w1 in db.Watched
+                     where w1.Filmid == filmid && w1.Userid == userid
+                     select w1).FirstOr(null);
+            if (w is null)
+                return false;
+            if (!w.Iswatched)
+            {
+                w.Iswatched = true;
+                db.SaveChanges();
+            }
+            return true;
+        }
+        public bool SetTimeStop(int userid, int filmid, TimeSpan timestop)
+        {
+            var w = (from w1 in db.Watched
+                     where w1.Filmid == filmid && w1.Userid == userid
+                     select w1).FirstOr(null);
+            if (w is null)
+                return false;
+            w.Timestop = timestop;
             db.SaveChanges();
             return true;
         }

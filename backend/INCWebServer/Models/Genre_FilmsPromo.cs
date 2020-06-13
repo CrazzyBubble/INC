@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace INCWebServer.Sources
+namespace INCWebServer.Models
 {
     public class Genre_FilmsPromo
     {

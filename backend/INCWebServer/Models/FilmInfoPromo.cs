@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace INCWebServer.Sources
+namespace INCWebServer.Models
 {
     public class FilmInfoPromo
     {

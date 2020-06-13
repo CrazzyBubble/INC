@@ -1,25 +1,36 @@
-GET https://localhost:44356/search
+GET https://localhost:5001/api/search
 
 ###
 
-GET https://localhost:44356/search/1
+GET https://localhost:5001/api/search/1
 
 ###
 
-GET https://localhost:44356/search/film=26.04
+GET https://localhost:5001/api/search/films?film=26.04
 
 ###
 
-GET https://localhost:44356/search/genre=music
+GET https://localhost:5001/api/search/films?genre=music
 
 ###
 
-GET https://localhost:44356/search/sorted_by_popularity
+GET https://localhost:5001/api/search/films?studio=music
 
 ###
 
-GET https://localhost:44356/search/sorted_by_rating
+GET https://localhost:5001/api/search/films?genreid=7
 
 ###
 
-GET https://localhost:44356/search/sorted_by_release
+GET https://localhost:5001/api/search/films?studioid=8
+###
+
+GET https://localhost:5001/api/search/sorted_by_popularity
+
+###
+
+GET https://localhost:5001/api/search/sorted_by_rating
+
+###
+
+GET https://localhost:5001/api/search/sorted_by_release

@@ -1,12 +1,16 @@
 ﻿using INCWebServer.Services;
+using INCWebServer.Sources;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace INCWebServer.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class SearchController : ControllerBase
     {
         private SearchPageService service;
@@ -23,45 +27,56 @@ namespace INCWebServer.Controllers
             return Ok(JsonConvert.SerializeObject(films));
         }
 
-        [HttpGet("film={name}")]
-        public ActionResult<string> GetFilmsByName(string name)
+        [HttpGet("films")]
+        public ActionResult<string> GetFilmsByOneParameter()
         {
-            var films = service.GetFilmsByName(name).Result;
-            return Ok(JsonConvert.SerializeObject(films));
-        }
-
-        [HttpGet("genre_name={name}")]
-        public ActionResult<string> GetFilmsByGenre(string name)
-        {
-            var films = service.GetFilmsByGenre(name).Result;
-            return Ok(JsonConvert.SerializeObject(films));
-        }
-
-        [HttpGet("studio_name={name}")]
-        public ActionResult<string> GetFilmsByStudio(string name)
-        {
-            var films = service.GetFilmsByStudio(name).Result;
-            return Ok(JsonConvert.SerializeObject(films));
-        }
-
-        [HttpGet("genre_id={id}")]
-        public ActionResult<string> GetFilmsByGenreId(int id)
-        {
-            var films = service.GetFilmsByGenreId(id).Result;
-            return Ok(JsonConvert.SerializeObject(films));
-        }
-
-        [HttpGet("studio_id={id}")]
-        public ActionResult<string> GetFilmsByStudioId(int id)
-        {
-            var films = service.GetFilmsByStudioId(id).Result;
-            return Ok(JsonConvert.SerializeObject(films));
+            if (Request.Query.Keys.Count > 1)
+                return BadRequest("A lot of parameters");
+            string[] keys = { "film", "genre", "studio", "genreid", "studioid" };
+            List<FilmInfoPromo> result = new List<FilmInfoPromo>();
+            for(int i = 0; i < keys.Length; ++i)
+            {
+                if (!Request.Query.ContainsKey(keys[i]))
+                    continue;
+                string value = Request.Query.FirstOrDefault(p => p.Key == keys[i]).Value;
+                switch(i)
+                {
+                    case 0:
+                        result = service.GetFilmsByName(value).Result;
+                        break;
+                    case 1:
+                        result = service.GetFilmsByGenre(value).Result;
+                        break;
+                    case 2:
+                        result = service.GetFilmsByStudio(value).Result;
+                        break;
+                    case 3:
+                        int id;
+                        if (!Int32.TryParse(value, out id))
+                            return BadRequest("Bad type");
+                        result = service.GetFilmsByGenreId(id).Result;
+                        break;
+                    case 4:
+                        if (!Int32.TryParse(value, out id))
+                            return BadRequest("Bad type");
+                        result = service.GetFilmsByStudioId(id).Result;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            }
+            if (result.Count == 0)
+                return NoContent();
+            return Ok(JsonConvert.SerializeObject(result));
         }
 
         [HttpGet("sorted_by_popularity")]
         public ActionResult<string> GetSortedFilmsByPopularity()
         {
             var films = service.GetSortedFilmsByPopularity().Result;
+            if (films == null)
+                return NoContent();
             return Ok(JsonConvert.SerializeObject(films));
         }
 
@@ -69,6 +84,8 @@ namespace INCWebServer.Controllers
         public ActionResult<string> GetSortedFilmsByRating()
         {
             var films = service.GetSortedFilmsByRating().Result;
+            if (films == null)
+                return NoContent();
             return Ok(JsonConvert.SerializeObject(films));
         }
 
@@ -76,6 +93,8 @@ namespace INCWebServer.Controllers
         public ActionResult<string> GetSortedFilmsByRelease()
         {
             var films = service.GetSortedFilmsByRelease().Result;
+            if (films == null)
+                return NoContent();
             return Ok(JsonConvert.SerializeObject(films));
         }
     }

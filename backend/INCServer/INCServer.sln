@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INCServer", "INCServer.csproj", "{FAA36180-5329-4C6A-B390-4CAB785D3077}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INCWebServer", "..\INCWebServer\INCWebServer.csproj", "{9782BE3F-8CF0-4B2C-A738-CC2D0FFD7DFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INCWebServer", "..\INCWebServer\INCWebServer.csproj", "{9782BE3F-8CF0-4B2C-A738-CC2D0FFD7DFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "..\WebApi\WebApi.csproj", "{A23205A6-D798-4D11-9FA4-F6A0AF0D5433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9782BE3F-8CF0-4B2C-A738-CC2D0FFD7DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9782BE3F-8CF0-4B2C-A738-CC2D0FFD7DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9782BE3F-8CF0-4B2C-A738-CC2D0FFD7DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23205A6-D798-4D11-9FA4-F6A0AF0D5433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23205A6-D798-4D11-9FA4-F6A0AF0D5433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23205A6-D798-4D11-9FA4-F6A0AF0D5433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23205A6-D798-4D11-9FA4-F6A0AF0D5433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,9 @@
 ﻿using INCServer;
 using INCServer.Context;
+using INCWebServer.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,26 +18,31 @@ namespace INCWebServer.Services
             this.db = db;
         }
 
-        public bool Enter(string email, string password)
+        public async Task<UserFullInfo> SignIn(string email, string password)
         {
             var user = (from u in db.Users
                        where u.Email == email.Trim() && u.Password == password.GetHashCode().ToString()
-                       select u).ToList();
-            if (user.Count > 0)
-                return true;
-            return false;
-            /*return Ok(JsonConvert.SerializeObject(parkingService.GetCapacity()));*/
+                       join ui in db.UserInfo on u.Id equals ui.Userid
+                       select new UserFullInfo(u, ui));
+            return await user.FirstOrDefaultAsync();
         }
 
-        public void PutNewUser(string email, string password, string firstname, string lastname, DateTime birthday)
+        public bool Registration(string email, string password, string firstname, string lastname, DateTime birthday)
         {
             User newuser = new User 
             { 
                 Email = email, 
                 Password = password.GetHashCode().ToString()
             };
-            db.Users.Add(newuser);
-            db.SaveChanges();
+            try
+            {
+                db.Users.Add(newuser);
+                db.SaveChanges();
+            }
+            catch(Exception)
+            {
+                return false;
+            }
             UserInfo newuserinfo = new UserInfo
             {
                 Firstname = firstname,
@@ -46,8 +50,15 @@ namespace INCWebServer.Services
                 Birthday = birthday,
                 Userid = newuser.Id
             };
-            db.UserInfo.Add(newuserinfo);
-            db.SaveChanges();
+            try
+            {
+                db.UserInfo.Add(newuserinfo);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+            }
+            return true;
         }
 
 
