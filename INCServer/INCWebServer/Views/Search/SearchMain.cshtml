@@ -1,0 +1,46 @@
+﻿@model List<Genre_FilmsPromo>
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="content_search_menu bottom-border flex-center">
+    <div class="menu_sort_search">
+        <a class="sort-main effect-shadow" asp-controller="Search" asp-action="GetFilmsByGenre">Main</a>
+        <a class="sort-main effect-shadow" asp-controller="Search" asp-action="GetSortedFilmsByRelease">Release</a>
+        <a class="sort-main effect-shadow" asp-controller="Search" asp-action="GetSortedFilmsByPopularity">Popularity</a>
+        <a class="sort-main effect-shadow" asp-controller="Search" asp-action="GetSortedFilmsByRating">Rating</a>
+    </div>
+    <div class="shell-search">
+        <form class="search">
+            <input type="search" class="field-search">
+            <button type="submit" class="button-search"></button>
+        </form>
+    </div>
+</div>
+
+<div class="finding_content">
+    @foreach (Genre_FilmsPromo gf in Model)
+    {
+        <div class="category_container">
+            <div class="films_category_title flex-center">
+                <span>@gf.GenreName</span>
+                <div class="line"></div>
+                <button class="other_button">other...</button>
+            </div>
+            <div class="search_film_info">
+                <div class="flex-center">
+                    @foreach (FilmInfoPromo f in gf.Films)
+                    {
+                        string ImageSrc = "";
+                        if (f.Image != null)
+                            ImageSrc = ViewData["FilmsImagesSRC"] + f.Image;
+                        <div class="search_film_preview">
+                            <img class="search_film_image" src=@ImageSrc>
+                            <p class="search_film_name">@f.Name</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

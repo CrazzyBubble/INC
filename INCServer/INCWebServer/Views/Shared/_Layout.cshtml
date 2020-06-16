@@ -1,0 +1,73 @@
+﻿@{ 
+    ViewData["Title"] = "Home";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Long+Cang|Roboto:300,300i,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <title> INC - @ViewData["Title"]</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container flex-center">
+            <a class="top__menu"><i class="fa fa-bars"></i></a>
+            <a class="top__logo">NightCinema</a>
+            <div class="top__account" style=""></div>
+        </div>
+    </header>
+
+    <div class="menu hidden">
+        <div class="menu__container">
+            <div class="shell-search">
+                <form class="search">
+                    <input type="search" class="field-search">
+                    <button type="submit" class="button-search"></button>
+                </form>
+            </div>
+            <div class="menu__top">
+                <div class="container-info">
+                    <ul class="top-films">
+                        <li>
+                            <a href="#" class="menu-text">Top week</a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-text">Top month</a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-text">Top new</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu__genre">
+                <div class="container-info">
+                    <ul class="genre-films">
+                        @foreach (string n in ViewBag.Genres)
+                        {
+                            <li>
+                                <a class="effect-shadow">@n</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </section>
+
+    <script src="~/js/script.js"></script>
+</body>
+
+</html>
