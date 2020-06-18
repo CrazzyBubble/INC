@@ -12,8 +12,8 @@
 
 <div class="video_player_container flex-center">
     <video class="video_player" controls="controls">
-        <source src=VideoSrc type="video/mp4">
-        Ваш браузер не поддерживает video.
+        <source src="@VideoSrc" type="video/mp4">
+        Video not supported.
     </video>
 </div>
 <div class="text_container">
@@ -26,38 +26,38 @@
             {
                 @if (Model.Rating != null && Model.Rating == i)
                 {
-                    <option class="selector_style" selected>i</option>
+                    <option class="selector_style" selected>@i</option>
                 }
                 else
                 {
-                    <option class="selector_style">i</option>
+                    <option class="selector_style">@i</option>
                 }
             }
         </select>
     </div>
     <div class="image_info"></div>
     <ul class="film_info_list">
+        @foreach (var i in Model.ListOptions)
+        {
+            <li id="@i.Key">
+                <span class="film_characteristic_name">@i.Key:</span>
+                @for (int j = 0; j < i.Value.Count; ++j)
+                {
+                    <span class="film_characteristic_info">@i.Value[j]</span>
+                    if (j != i.Value.Count - 1)
+                    {
+                        <span>, </span>
+                    }
+                }
+            </li>
+        }
         @foreach (var i in Model.SoloOptions)
         {
-            <li>
+            <li id="@i.Key">
                 <span class="film_characteristic_name">@i.Key:</span>
                 <span class="film_characteristic_info">@i.Value</span>
             </li>
         }
-        @foreach (var i in Model.ListOptions)
-        {
-            <li>
-                <span class="film_characteristic_name">@i.Key:</span>
-                @foreach (var j in (List<object>)i.Value)
-                {
-                    <span class="film_characteristic_info">@j, </span>
-                }
-            </li>
-        }
-        <li>
-            <span class="film_characteristic_name">Description:</span>
-            <span class="film_characteristic_info">@Model.Name</span>
-        </li>
     </ul>
 </div>
 <div class="comments_container hidden">

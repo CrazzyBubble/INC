@@ -45,7 +45,7 @@ namespace INCWebServer
                             ValidateIssuerSigningKey = true,
                         };
                     });
-            services.AddScoped<LoginService>();
+            services.AddScoped<AccountService>();
             services.AddScoped<SearchService>();
             services.AddScoped<ViewService>();
             services.AddScoped<SubsidiaryService>();

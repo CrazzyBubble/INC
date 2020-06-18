@@ -17,53 +17,53 @@
 
 <body>
     <div class="container">
-        <form class="login" method="GET" autocomplete="off" action="index.html">
+        <form class="login_form" method="Post" autocomplete="off" action="account/login">
             <div class="flex-center">
                 <div class="header_name">Sign in</div>
                 <a class="register_button effect-shadow">sign up</a>
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-user image_login_password" aria-hidden="true"></i>
-                <input class="login" name="login" placeholder="email" />
+                <input class="login" name="email" placeholder="email" />
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-lock image_login_password" aria-hidden="true"></i>
                 <input class="password" type="password" name="password" placeholder="password" />
             </div>
-            <div class="field_button button">
+            <div class="field_button">
                 <input class="submit_button" type="submit" value="Log in">
             </div>
         </form>
-        <form class="registration hidden" method="GET" autocomplete="off" action="index.html">
+        <form class="registration_form hidden" method="Post" autocomplete="off" action="account/register">
             <div class="flex-center">
                 <div class="header_name">Sign up</div>
                 <a class="register_button effect-shadow">sign in</a>
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-user image_login_password" aria-hidden="true"></i>
-                <input class="login" name="login" placeholder="first name" />
+                <input class="login" name="first_name" placeholder="first name" />
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-user image_login_password" aria-hidden="true"></i>
-                <input class="login" name="login" placeholder="second name*" />
+                <input class="login" name="second_name" placeholder="second name*" />
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-envelope image_login_password" aria-hidden="true"></i>
-                <input class="login" name="login" placeholder="email" />
+                <input class="login" name="email" placeholder="email" />
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-calendar image_login_password" aria-hidden="true"></i>
                 <input class="date" type="date" min="1900-01-01" max="2008-01-01" name="birthday" />
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-lock image_login_password" aria-hidden="true"></i>
                 <input class="password" type="password" name="password" placeholder="password" />
             </div>
-            <div class="field content">
+            <div class="field_content">
                 <i class="fa fa-lock image_login_password" aria-hidden="true"></i>
                 <input class="password" type="password" name="confirm_password" placeholder="confirm password" />
             </div>
-            <div class="field_button button">
+            <div class="field_button">
                 <input class="submit_button" type="submit" value="Register">
             </div>
         </form>

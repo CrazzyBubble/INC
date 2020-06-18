@@ -11,29 +11,31 @@ namespace INCWebServer.Services
     public class SearchService: IDisposable
     {
         incContext db;
+        public int FilmsCapacity { set; get; } = 5;
 
         public SearchService(incContext db)
         {
             this.db = db;
         }
 
-        public async Task<List<Genre_FilmsPromo>> GetGenres_Films()
+        public async Task<Dictionary<string, List<FilmInfoPromo>>> GetGenres_Films()
         {
-            var gfilms =    from genre in db.Genres
-                            where 
-                            (from fg in db.FilmGenre
+            Dictionary<string, List<FilmInfoPromo>> res = new Dictionary<string, List<FilmInfoPromo>>();
+            foreach(var genre in db.Genres.OrderBy(g => g.Name).ToList())
+            {
+                var films = await (from fg in db.FilmGenre
                             where fg.Genreid == genre.Id
-                            select fg).Count() > 0
-                            orderby genre.Name
-                            select new Genre_FilmsPromo(
-                                genre.Name, 
-                                (from fg in db.FilmGenre
-                                 where fg.Genreid == genre.Id
-                                 orderby fg.Film.Date descending
-                                 select new FilmInfoPromo(fg.Film.Id, fg.Film.Name, fg.Film.ImageSrc)
-                                ).ToList()
-                            );
-            return await gfilms.ToListAsync();
+                            orderby fg.Film.Date descending
+                            select new FilmInfoPromo(fg.Film.Id, fg.Film.Name, fg.Film.ImageSrc)).ToListAsync();
+                if (films.Count() > 0)
+                {
+                    if (films.Count > FilmsCapacity)
+                        res.Add(genre.Name, films.GetRange(0, FilmsCapacity));
+                    else
+                        res.Add(genre.Name, films);
+                }
+            }
+            return res;
         }
 
         public async Task<List<FilmInfoPromo>> GetFilmsByName(string name)

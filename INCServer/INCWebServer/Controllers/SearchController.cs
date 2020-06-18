@@ -5,9 +5,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INCWebServer.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class SearchController : Controller
@@ -22,16 +25,16 @@ namespace INCWebServer.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetFilmsByGenre()
+        public async Task<IActionResult> GetFilmsByGenre()
         {
             ViewData["Genres"] = subservice.GetUsefullGenres().Result;
-            var films = service.GetGenres_Films().Result;
+            var films = await service.GetGenres_Films();
             return View("SearchMain", films);
             //return Ok(JsonConvert.SerializeObject(films));
         }
 
         [HttpGet("films")]
-        public IActionResult GetFilmsByOneParameter()
+        public async Task<IActionResult> GetFilmsByOneParameter()
         {
             ViewData["Genres"] = subservice.GetUsefullGenres().Result;
             ViewData["ParameterName"] = "none";
@@ -47,24 +50,24 @@ namespace INCWebServer.Controllers
                 switch(i)
                 {
                     case 0:
-                        result = service.GetFilmsByName(value).Result;
+                        result = await service.GetFilmsByName(value);
                         break;
                     case 1:
-                        result = service.GetFilmsByGenre(value).Result;
+                        result = await service.GetFilmsByGenre(value);
                         break;
                     case 2:
-                        result = service.GetFilmsByStudio(value).Result;
+                        result = await service.GetFilmsByStudio(value);
                         break;
                     case 3:
                         int id;
                         if (!Int32.TryParse(value, out id))
-                            return BadRequest("Bad type");
-                        result = service.GetFilmsByGenreId(id).Result;
+                            return BadRequest("Bad parameter type");
+                        result = await service.GetFilmsByGenreId(id);
                         break;
                     case 4:
                         if (!Int32.TryParse(value, out id))
-                            return BadRequest("Bad type");
-                        result = service.GetFilmsByStudioId(id).Result;
+                            return BadRequest("Bad parameter type");
+                        result = await service.GetFilmsByStudioId(id);
                         break;
                     default:
                         break;
@@ -78,11 +81,11 @@ namespace INCWebServer.Controllers
             //return Ok(JsonConvert.SerializeObject(result));
         }
 
-        [HttpGet("sorted_by_popularity")]
-        public IActionResult GetSortedFilmsByPopularity()
+        [HttpGet("sort/popularity")]
+        public async Task<IActionResult> GetSortedFilmsByPopularity()
         {
-            ViewData["Genres"] = subservice.GetUsefullGenres().Result;
-            var films = service.GetSortedFilmsByPopularity().Result;
+            ViewData["Genres"] = await subservice.GetUsefullGenres();
+            var films = await service.GetSortedFilmsByPopularity();
             if (films == null)
                 return NoContent();
             ViewData["TypeOperation"] = "popularity";
@@ -90,11 +93,11 @@ namespace INCWebServer.Controllers
             //return Ok(JsonConvert.SerializeObject(films));
         }
 
-        [HttpGet("sorted_by_rating")]
-        public IActionResult GetSortedFilmsByRating()
+        [HttpGet("sort/rating")]
+        public async Task<IActionResult> GetSortedFilmsByRating()
         {
-            ViewData["Genres"] = subservice.GetUsefullGenres().Result;
-            var films = service.GetSortedFilmsByRating().Result;
+            ViewData["Genres"] = await subservice.GetUsefullGenres();
+            var films = await service.GetSortedFilmsByRating();
             if (films == null)
                 return NoContent();
             ViewData["TypeOperation"] = "rating";
@@ -102,11 +105,11 @@ namespace INCWebServer.Controllers
             //return Ok(JsonConvert.SerializeObject(films));
         }
 
-        [HttpGet("sorted_by_release")]
-        public IActionResult GetSortedFilmsByRelease()
+        [HttpGet("sort/release")]
+        public async Task<IActionResult> GetSortedFilmsByRelease()
         {
-            ViewData["Genres"] = subservice.GetUsefullGenres().Result;
-            var films = service.GetSortedFilmsByRelease().Result;
+            ViewData["Genres"] = await subservice.GetUsefullGenres();
+            var films = await service.GetSortedFilmsByRelease();
             if (films == null)
                 return NoContent();
             ViewData["TypeOperation"] = "release";

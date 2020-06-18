@@ -1,6 +1,7 @@
 ﻿using INCServer.Context;
 using System;
-using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace INCServer
 {
@@ -8,7 +9,8 @@ namespace INCServer
     {
         static void Main(string[] args)
         {
-            using(incContext db = new incContext())
+            string value = "12345678";
+            /*using (incContext db = new incContext())
             {
                 var users = db.Users.ToList();
                 Console.WriteLine("List of users");
@@ -16,7 +18,7 @@ namespace INCServer
                 {
                     Console.WriteLine($"{u.Id}\t{u.Email}\t{u.Password}\t{u.Rightid}");
                 }
-            }
+            }*/
         }
     }
 }

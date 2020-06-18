@@ -9,24 +9,19 @@ using System.Threading.Tasks;
 
 namespace INCWebServer.Services
 {
-    public class LoginService:IDisposable
+    public class AccountService:IDisposable
     {
         incContext db;
 
-        public LoginService(incContext db)
+        public AccountService(incContext db)
         {
             this.db = db;
         }
 
         public async Task<User> SignIn(LoginModel model)
         {
-            /*var user = (from u in db.Users
-                       where u.Email == model.Email && u.Password == model.Password.GetHashCode().ToString()
-                       join ui in db.UserInfo on u.Id equals ui.Userid
-                       select new UserFullInfo(u, ui));
-            return await user.FirstOrDefaultAsync();*/
             return await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && 
-            u.Password == model.Password.GetHashCode().ToString());
+            AuthOptions.VerifyHashedPassword(u.Password, model.Password));
         }
 
         public bool Registration(RegistrationModel model)
@@ -34,7 +29,7 @@ namespace INCWebServer.Services
             User user = db.Users.FirstOrDefault(u => u.Email == model.Email);
             if(user == null)
             {
-                user = new User { Email = model.Email, Password = model.GetHashCode().ToString() };
+                user = new User { Email = model.Email, Password = AuthOptions.GetHashPassword(model.Password) };
                 db.Users.Add(user);
                 db.SaveChanges();
                 db.UserInfo.Add(new UserInfo { 

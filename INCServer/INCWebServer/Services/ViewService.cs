@@ -17,7 +17,7 @@ namespace INCWebServer.Services
             this.db = db;
         }
 
-        public async Task<FilmInfoFull> GetFilmById(int id, int userID=0)
+        public async Task<FilmInfoFull> GetFilmById(int id, int userID=1)
         {
             if (userID == 0)
                 return null;

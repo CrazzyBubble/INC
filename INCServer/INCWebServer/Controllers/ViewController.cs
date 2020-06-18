@@ -1,14 +1,17 @@
 ﻿using INCWebServer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace INCWebServer.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]/film")]
+    [Route("[controller]")]
     public class ViewController : Controller
     {
         private readonly ViewService service;
@@ -20,12 +23,12 @@ namespace INCWebServer.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetFullFilm(int id=-1)
+        public async Task<IActionResult> GetFullFilm(int id=-1)
         {
             if (id == -1)
                 return BadRequest();
-            ViewData["Genres"] = subservice.GetUsefullGenres().Result;
-            var film = service.GetFilmById(id).Result;
+            ViewData["Genres"] = await subservice.GetUsefullGenres();
+            var film = await service.GetFilmById(id);
             if (film is null)
                 return NotFound("Film not found");
             return View("Watch", film);
@@ -33,10 +36,12 @@ namespace INCWebServer.Controllers
         }
 
         [HttpGet("last")]
-        public IActionResult GetLastFilm(int userid)
+        public async Task<IActionResult> GetLastFilm(int userid=-1)
         {
-            ViewData["Genres"] = subservice.GetUsefullGenres().Result;
-            var film = service.GetLastFilm(userid).Result;
+            if (userid == -1)
+                return BadRequest();
+            ViewData["Genres"] = await subservice.GetUsefullGenres();
+            var film = await service.GetLastFilm(userid);
             if (film is null)
                 return NotFound("Film not found");
             return View("Watch", film);

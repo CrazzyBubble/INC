@@ -1,4 +1,4 @@
-﻿@model List<Genre_FilmsPromo>
+﻿@model Dictionary<string, List<FilmInfoPromo>>
 @{
     ViewData["Title"] = "Search";
 }
@@ -19,26 +19,17 @@
 </div>
 
 <div class="finding_content">
-    @foreach (Genre_FilmsPromo gf in Model)
+    @foreach (var gf in Model)
     {
         <div class="category_container">
             <div class="films_category_title flex-center">
-                <span>@gf.GenreName</span>
+                <span>@gf.Key</span>
                 <div class="line"></div>
                 <button class="other_button">other...</button>
             </div>
             <div class="search_film_info">
                 <div class="flex-center">
-                    @foreach (FilmInfoPromo f in gf.Films)
-                    {
-                        string ImageSrc = "";
-                        if (f.Image != null)
-                            ImageSrc = ViewData["FilmsImagesSRC"] + f.Image;
-                        <div class="search_film_preview">
-                            <img class="search_film_image" src=@ImageSrc>
-                            <p class="search_film_name">@f.Name</p>
-                        </div>
-                    }
+                    @await Html.PartialAsync("GetFoundFilms", gf.Value)
                 </div>
             </div>
         </div>

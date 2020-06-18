@@ -13,9 +13,6 @@ namespace INCWebServer.Models
         [JsonProperty("name")]
         public string Name { set; get; }
 
-        [JsonProperty("description")]
-        public string Description { set; get; }
-
         [JsonProperty("logo")]
         public string ImageSrc { set; get; }
 
@@ -23,10 +20,10 @@ namespace INCWebServer.Models
         public List<FilmResources> VideoSrc { set; get; }
 
         [JsonProperty("solo_properties")]
-        public Dictionary<string, object> SoloOptions { set; get; }
+        public Dictionary<string, string> SoloOptions { set; get; }
 
         [JsonProperty("list_properties")]
-        public Dictionary<string, object> ListOptions { set; get; }
+        public Dictionary<string, List<string>> ListOptions { set; get; }
 
         [JsonProperty("isliked")]
         public bool IsLiked { set; get; }
@@ -38,30 +35,35 @@ namespace INCWebServer.Models
         {
             Id = film.Id;
             Name = film.Name;
-            Description = film.Description??"";
             ImageSrc = film.ImageSrc;
             VideoSrc = src;
             IsLiked = isliked;
             Rating = rating;
-            SoloOptions = new Dictionary<string, object>();
-            ListOptions = new Dictionary<string, object>();
+            SoloOptions = new Dictionary<string, string>();
+            ListOptions = new Dictionary<string, List<string>>();
             AddSoloOptions("Country", film.Country);
-            AddSoloOptions("Release", film.Date);
+            AddSoloOptions("Release", film.Date.Value.ToString("d"));
             AddSoloOptions("Categories", film.Categories);
+            AddSoloOptions("Description", film.Description);
             AddListOptions("Genres", genres);
-            AddListOptions("Directors", film.Directors);
+            AddListOptions("Directors", film.Directors.ToList());
             AddListOptions("Studios", studios);
         }
         public void AddSoloOptions<T>(string key, T value)
         {
             if (value != null)
-                SoloOptions.Add(key, value);
+                SoloOptions.Add(key, value.ToString());
         }
 
-        public void AddListOptions<T>(string key, T value)
+        public void AddListOptions<T>(string key, List<T> value)
         {
-            if (value != null)
-                ListOptions.Add(key, value);
+            if (value != null && value.Count>0)
+            {
+                List<string> newv = new List<string>();
+                for (int i = 0; i < value.Count; ++i)
+                    newv.Add(value[i].ToString());
+                ListOptions.Add(key, newv);
+            }
         }
     }
 }

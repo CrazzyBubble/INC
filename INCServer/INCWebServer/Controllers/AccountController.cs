@@ -1,6 +1,8 @@
 ﻿using INCServer;
 using INCWebServer.Models;
 using INCWebServer.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -8,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,8 +20,8 @@ namespace INCWebServer.Controllers
     [Route("[controller]")]
     public class AccountController : Controller
     {
-        private readonly LoginService service;
-        public AccountController(LoginService service)
+        private readonly AccountService service;
+        public AccountController(AccountService service)
         {
             this.service = service;
         }
@@ -28,10 +31,13 @@ namespace INCWebServer.Controllers
         {
             return View("Main");
         }
-        [HttpPost("token")]
-        public IActionResult Token(LoginModel model)
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginModel model)
         {
-            var identity = GetIdentity(model);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var identity = await GetIdentity(model);
             if (identity == null)
             {
                 return BadRequest("Invalid username or password.");
@@ -58,76 +64,36 @@ namespace INCWebServer.Controllers
             return Ok(JsonConvert.SerializeObject(response));
         }
 
-        private ClaimsIdentity GetIdentity(LoginModel model)
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register(RegistrationModel model)
         {
-            User person = service.SignIn(model).Result;
-            if (person != null)
+            if (!ModelState.IsValid)
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Right.Name)
-                };
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(
-                    claims, 
-                    "Token", 
-                    ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
+                return BadRequest(ModelState);
             }
-            return null;
+            if (!service.Registration(model))
+            {
+                return BadRequest("Email already exist!");
+            }
+            return Ok();
         }
-        /*private async Task Authenticate(string userName)
+        private async Task<ClaimsIdentity> GetIdentity(LoginModel model)
         {
-            // создаем один claim
+            User person = await service.SignIn(model);
+            if (person == null)
+                return null;
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Right.Name)
             };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claims, 
+                "Token", 
+                ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
+            return claimsIdentity;
         }
-
-        [HttpPost("login")]
-        public async Task<ActionResult<string>> SignIn(LoginModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = service.SignIn(model).Result;
-                if (user != null)
-                {
-                    await Authenticate(model.Email); // аутентификация
-                    return Ok(); //RedirectToAction("", "search");
-                }
-                ModelState.AddModelError("", "Incorrect login or password");
-            }
-            return NotFound();
-        }
-
-        [HttpPost("registration")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult<string>> SignUp(RegistrationModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var isOk = service.Registration(model);
-                if (isOk)
-                {
-                    await Authenticate(model.Email);
-                    return Ok();//RedirectToAction("", "search");
-                }
-                else
-                    ModelState.AddModelError("", $"User with this email already exist");
-            }
-            return BadRequest();
-        }
-
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
-        }*/
     }
 }

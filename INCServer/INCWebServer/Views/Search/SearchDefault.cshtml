@@ -7,16 +7,7 @@
     <div class="category_container">
         <div class="search_film_info">
             <div class="flex-center">
-                @foreach (FilmInfoPromo f in Model)
-                {
-                    string ImageSrc = "";
-                    if (f.Image != null)
-                        ImageSrc = ViewData["FilmsImagesSRC"] + f.Image;
-                    <div class="search_film_preview">
-                        <img class="search_film_image" src="@ImageSrc">
-                        <p class="search_film_name">@f.Name</p>
-                    </div>
-                }
+                @await Html.PartialAsync("GetFoundFilms", Model)
             </div>
         </div>
     </div>
