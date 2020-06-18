@@ -1,3 +1,5 @@
+//---------- log in / registration switcher ----------
+
 var button_changes = document.querySelectorAll(".register_button");
 var login_page = document.querySelector(".login");
 var register_page = document.querySelector(".registration");

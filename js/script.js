@@ -1,3 +1,5 @@
+//---------- menu open button ----------
+
 var button_menu_open = document.querySelector(".top__menu");
 var left_menu = document.querySelector(".menu");
 
@@ -9,6 +11,21 @@ button_menu_open.addEventListener("click", () => {
     }
 });
 
+//---------- account options button ----------
+
+var show_account_options = document.querySelector(".top__account");
+var account_options = document.querySelector(".account_options");
+
+show_account_options.addEventListener("click", () => {
+    if (account_options.classList.contains('hidden')) {
+        account_options.classList.remove('hidden');
+    } else {
+        account_options.classList.add('hidden');
+    }
+});
+
+//---------- film ratio counter ----------
+
 var x = document.querySelector("select");
 var i;
 for (i = 0; i < 10; i++) {
@@ -17,6 +34,8 @@ for (i = 0; i < 10; i++) {
     option.classList.add("selector_style");
     x.add(option);
 }
+
+//---------- like clicker ----------
 
 var liked = document.querySelector(".image_like");
 liked.addEventListener("click", () => {
