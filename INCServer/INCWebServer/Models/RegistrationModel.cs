@@ -20,7 +20,7 @@ namespace INCWebServer.Models
         [Required(ErrorMessage = "Firstname is not specified")]
         public string Firstname { get; set; }
 
-        public string Lastname { get; set; }
+        public string Lastname { get; set; } = "";
         
         [Required(ErrorMessage = "Birthday is not specified")]
         public DateTime Birthday { get; set; }

@@ -2,16 +2,17 @@
 @{
     ViewData["Title"] = Model.Name;
     string VideoSrc = "";
+    ViewData["BaseURL"] = "Media/";
     if (Model.VideoSrc.Count > 0)
-        VideoSrc = ViewData["FilmsSRC"] + Model.VideoSrc[0].Src;
+        VideoSrc = ViewData["BaseURL"] + Model.VideoSrc[0].Src;
     string isHeartOn = "";
     if (Model.IsLiked)
         isHeartOn = "On";
 }
 
 
-<div class="video_player_container flex-center">
-    <video class="video_player" controls="controls">
+<div class="video_player_container flex-center" >
+    <video class="video_player" controls="controls" >
         <source src="@VideoSrc" type="video/mp4">
         Video not supported.
     </video>

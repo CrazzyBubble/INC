@@ -16,7 +16,7 @@ namespace INCServer
         [JsonProperty("email")]
         public string Email { get; set; }
         [JsonIgnore]
-        public short Rightid { get; set; }
+        public short Rightid { get; set; } = 2;
         [JsonIgnore]
         public string Password { get; set; }
         [JsonIgnore]
@@ -26,5 +26,8 @@ namespace INCServer
         public virtual UserRights Right { get; set; }
         [JsonIgnore]
         public virtual ICollection<Watched> Watched { get; set; }
+
+        [JsonIgnore]
+        public virtual UserInfo Info { get; set; }
     }
 }

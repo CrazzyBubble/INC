@@ -1,18 +1,27 @@
+:root {
+    --main-shadow: #26c2c7;
+    --main-background: #000000;
+    --second-background: rgba(10, 10, 10, 0.95);
+    --page-second-color: #26c2c7;
+    --height-top: 60px;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-*:focus {
-    outline: none;
-}
+    *:focus {
+        outline: none;
+    }
 
 body {
-    background: rgb(6, 10, 16);
+    background: var(--main-background);
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     color: #ddd;
+    height: auto;
 }
 
 div {
@@ -38,6 +47,8 @@ li {
 
 .container {
     max-width: 1270px;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
 }
 
@@ -47,9 +58,9 @@ li {
     top: 0;
     padding: 0px 0;
     width: 100%;
-    height: 60px;
-    background: rgba(0, 5, 10, 0.8);
-    border-bottom: 1px solid #5e5e5e;
+    height: var(--height-top);
+    background: var(--second-background);
+    border-bottom: 1px solid var(--page-second-color);
 }
 
 .flex-center {
@@ -62,16 +73,25 @@ li {
     font-size: 32px;
 }
 
+.fa.fa-bars {
+    text-shadow: -1px -1px 5px var(--page-second-color);
+}
+
 .top__logo {
     font-family: 'Long Cang', cursive;
-    text-shadow: -1px -1px 5px rgba(0, 250, 250, 0.5);
+    text-shadow: -1px -1px 5px var(--main-shadow);
     font-size: 52px;
 }
+
+
+/* .details_top_account {
+    opacity: 100%;
+} */
 
 .top__account {
     width: 42px;
     height: 42px;
-    border: 2px rgba(0, 250, 250, 0.4) inset;
+    border: 2px var(--main-shadow) inset;
     border-radius: 50%;
     background: url("../images/will_smith.jpg") #fff center;
     background-size: contain;
@@ -80,31 +100,53 @@ li {
     transition: 0.5s;
 }
 
-.top__account:hover {
-    box-shadow: 0px 0px 10px 2px rgba(0, 250, 250, 0.7);
-    border-color: rgba(0, 250, 250, 0.7);
-}
+    .top__account:hover {
+        box-shadow: 0px 0px 10px 2px var(--main-shadow);
+        border-color: var(--main-shadow);
+    }
 
 .menu {
     z-index: 10;
     position: fixed;
+    top: var(--height-top);
     background: transparent;
     height: 100%;
-    padding: 60px 0px 100px 0px;
     width: 200px;
 }
 
 .menu__container {
-    margin: 60px 0px, 100px, 0px;
     padding: 14px;
     border: 1px solid #5e5e5e;
     border-left: none;
     height: 100%;
-    background: rgba(0, 5, 10, 0.96);
+    background: var(--main-background);
+}
+
+.account_options {
+    z-index: 10;
+    position: fixed;
+    top: var(--height-top);
+    right: 1em;
+    background: transparent;
+    height: auto;
+    width: auto;
+}
+
+.account_options_container {
+    border: 1px solid #5e5e5e;
+    padding: 1em;
+    background: var(--main-background);
+    font-weight: 100;
+}
+
+.up_line {
+    margin-top: 0.5em;
+    border-top: 1px solid #5e5e5e;
 }
 
 .shell-search {
     max-width: 225px;
+    height: max-content;
     box-sizing: border-box;
     border-radius: 10px;
 }
@@ -121,7 +163,7 @@ li {
     padding-left: 5px;
     padding-right: 24px;
     border-radius: 10px;
-    border: 1px solid #26c2c7;
+    border: 1px solid var(--main-shadow);
 }
 
 .button-search {
@@ -133,11 +175,11 @@ li {
     background: none;
 }
 
-.button-search::before {
-    content: "\f002";
-    font-family: FontAwesome;
-    color: red;
-}
+    .button-search::before {
+        content: "\f002";
+        font-family: FontAwesome;
+        color: red;
+    }
 
 .container-info {
     padding: 10px 20px;
@@ -149,8 +191,10 @@ li {
 }
 
 .content {
+    display: block;
     padding-top: 75px;
     min-height: 768px;
+    height: auto;
     background: transparent;
 }
 
@@ -168,14 +212,14 @@ li {
     font-style: italic;
 }
 
-.menu_sort_search span {
-    margin-right: 20px;
-}
+    .menu_sort_search span {
+        margin-right: 20px;
+    }
 
 .effect-shadow:hover {
     transition-duration: 0.5s;
     color: rgb(0, 255, 255);
-    text-shadow: 1px 0px 10px rgba(0, 225, 225, 0.6);
+    text-shadow: 1px 0px 10px var(--main-shadow);
 }
 
 .category_container {
@@ -201,7 +245,7 @@ li {
 }
 
 .search_film_image {
-    background: #000 url(https://nds46.ru/ava/noavatar.png);
+    background-color: white;
     border-color: white;
     padding: 1px;
     width: 8em;
@@ -217,6 +261,7 @@ li {
     /* justify-content: center; */
     width: 8em;
     text-align: center;
+    margin-right: 6em;
 }
 
 .video_player_container {
@@ -243,7 +288,7 @@ li {
 }
 
 .image_info {
-    background: #ffffff/*url("../images/photo.PNG")*/
+    background: #ffffff /*url("../images/photo.PNG")*/
     ;
     background-repeat: no-repeat;
     width: 8em;
@@ -343,7 +388,7 @@ li {
     border: none;
     border-radius: 5px;
     animation: none;
-    border-bottom: 1px #26c2c7 solid;
+    border-bottom: 1px var(--main-shadow) solid;
 }
 
 .selector_style {
@@ -358,10 +403,24 @@ li {
 }
 
 
-/* .image_like:hover {
-    color: #26c2c7;
-} */
-
 .on {
     color: red;
+}
+
+.flex-left {
+    display: flex;
+    align-items: flex-start;
+    margin: 10px 0px;
+}
+
+.footer {
+    display: block;
+    max-height: var(--height-top);
+    height: auto;
+    width: 100%;
+    border-top: 1px var(--main-shadow) solid;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
 }

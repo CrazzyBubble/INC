@@ -28,9 +28,7 @@
                 <button class="other_button">other...</button>
             </div>
             <div class="search_film_info">
-                <div class="flex-center">
-                    @await Html.PartialAsync("GetFoundFilms", gf.Value)
-                </div>
+                @await Html.PartialAsync("GetFoundFilms", gf.Value)
             </div>
         </div>
     }

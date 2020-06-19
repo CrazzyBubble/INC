@@ -15,8 +15,8 @@ body {
 }
 
 .container {
-    width: fit-content;
-    height: fit-content;
+    width: auto;
+    height: auto;
     margin: 0;
     padding: 30px 20px;
     position: relative;

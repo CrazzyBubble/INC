@@ -28,5 +28,9 @@ namespace INCWebServer.Services
                           select g.Name).ToListAsync();
 
         }
+        public string GetPersonRight(int idRight)
+        {
+            return db.UserRights.FirstOrDefault(r => r.Id == idRight)?.Name;
+        }
     }
 }

@@ -10,7 +10,5 @@ namespace INCWebServer.Models
         [Required(ErrorMessage = "Password is not specified")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        public string Role { get; set; }
     }
 }

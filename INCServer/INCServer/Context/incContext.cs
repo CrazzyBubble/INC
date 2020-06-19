@@ -272,8 +272,6 @@ namespace INCServer.Context
 
             modelBuilder.Entity<UserInfo>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("user_info");
 
                 entity.HasIndex(e => e.Userid)
@@ -302,7 +300,7 @@ namespace INCServer.Context
                 entity.Property(e => e.Money).HasColumnName("money");
 
                 entity.HasOne(d => d.User)
-                    .WithOne()
+                    .WithOne(p => p.Info)
                     .HasForeignKey<UserInfo>(d => d.Userid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("user_info_fk_user");

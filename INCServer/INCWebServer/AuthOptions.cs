@@ -8,8 +8,8 @@ namespace INCWebServer
     public class AuthOptions
     {
         public const string ISSUER = "https://localhost:5001/"; // издатель токена
-        public const string AUDIENCE = "file:///C:/1.6_semester/Technology_of_program-2/INC/backend/INCWebServer/wwwroot/"; // потребитель токена
-        const string KEY = "secretkey_INCCorporation!";   // ключ для шифрации
+        public const string AUDIENCE = "https://localhost:5001/"; // потребитель токена
+        const string KEY = "secretkey_INCCorporation";   // ключ для шифрации
         public const int LIFETIME = 10; // время жизни токена - 10-15 минут
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {

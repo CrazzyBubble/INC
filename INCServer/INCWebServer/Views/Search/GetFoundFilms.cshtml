@@ -1,12 +1,14 @@
 ﻿@model List<FilmInfoPromo>
 
-@foreach (FilmInfoPromo f in Model)
-{
-    string ImageSrc = "";
-    if (f.Image != null)
-        ImageSrc = ViewData["FilmsImagesSRC"] + f.Image;
-    <div class="search_film_preview">
-        <img class="search_film_image" src="@ImageSrc">
-        <p class="search_film_name">@f.Name</p>
-    </div>
-}
+<div class="flex-left">
+    @foreach (FilmInfoPromo f in Model)
+    {
+        string ImageSrc = "";
+        if (f.Image != null)
+            ImageSrc = ViewData["FilmsImagesSRC"] + f.Image;
+        <div class="search_film_preview">
+            <img class="search_film_image" src="@ImageSrc">
+            <p class="search_film_name">@f.Name</p>
+        </div>
+    }
+</div>

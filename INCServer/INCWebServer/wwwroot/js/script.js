@@ -9,23 +9,29 @@ button_menu_open.addEventListener("click", () => {
     }
 });
 
-/*var x = document.querySelector("select");
-var i;
-for (i = 0; i < 10; i++) {
-    var option = document.createElement("option");
-    option.text = i + 1;
-    option.classList.add("selector_style");
-    x.add(option);
-}*/
+//---------- account options button ----------
+
+var show_account_options = document.querySelector(".top__account");
+var account_options = document.querySelector(".account_options");
+
+show_account_options.addEventListener("click", () => {
+    if (account_options.classList.contains('hidden')) {
+        account_options.classList.remove('hidden');
+    } else {
+        account_options.classList.add('hidden');
+    }
+});
+
+//---------- like clicker ----------
 
 var liked = document.querySelector(".image_like");
-liked.addEventListener("click", () => {
-    if (liked.classList.contains('on')) {
-        liked.classList.remove('on');
-    } else {
-        liked.classList.add('on');
-        liked.classList.remove("hover");
-        liked.removeAttribute("hover");
-        liked.removeAttribute
-    }
-})
+if (liked != null) {
+    liked.addEventListener("click", () => {
+        if (liked.classList.contains('on')) {
+            liked.classList.remove('on');
+        }
+        else {
+            liked.classList.add('on');
+        }
+    });
+}

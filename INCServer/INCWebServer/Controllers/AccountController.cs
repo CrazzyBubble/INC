@@ -21,9 +21,11 @@ namespace INCWebServer.Controllers
     public class AccountController : Controller
     {
         private readonly AccountService service;
-        public AccountController(AccountService service)
+        private readonly SubsidiaryService subservice;
+        public AccountController(AccountService service, SubsidiaryService subservice)
         {
             this.service = service;
+            this.subservice = subservice;
         }
 
         [HttpGet]
@@ -36,7 +38,7 @@ namespace INCWebServer.Controllers
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(ModelState.Values);
             var identity = await GetIdentity(model);
             if (identity == null)
             {
@@ -72,9 +74,16 @@ namespace INCWebServer.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!service.Registration(model))
+            try
             {
-                return BadRequest("Email already exist!");
+                if (!service.Registration(model))
+                {
+                    return BadRequest("Email already exist!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
             return Ok();
         }
@@ -86,7 +95,7 @@ namespace INCWebServer.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Right.Name)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, subservice.GetPersonRight(person.Rightid)??"")
             };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(
                 claims, 

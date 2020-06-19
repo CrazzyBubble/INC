@@ -1,11 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace INCServer
 {
     public partial class UserInfo
     {
         [JsonProperty("userid")]
+        [Key]
         public int Userid { get; set; }
         [JsonProperty("firstname")]
         public string Firstname { get; set; }

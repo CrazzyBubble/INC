@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace INCWebServer.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class SearchController : Controller

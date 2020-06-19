@@ -20,8 +20,10 @@ namespace INCWebServer.Services
 
         public async Task<User> SignIn(LoginModel model)
         {
-            return await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && 
-            AuthOptions.VerifyHashedPassword(u.Password, model.Password));
+            var user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+            if (user != null && AuthOptions.VerifyHashedPassword(user.Password, model.Password))
+                return user;
+            return null;
         }
 
         public bool Registration(RegistrationModel model)
@@ -29,14 +31,17 @@ namespace INCWebServer.Services
             User user = db.Users.FirstOrDefault(u => u.Email == model.Email);
             if(user == null)
             {
-                user = new User { Email = model.Email, Password = AuthOptions.GetHashPassword(model.Password) };
-                db.Users.Add(user);
-                db.SaveChanges();
-                db.UserInfo.Add(new UserInfo { 
-                    Userid = user.Id,
-                    Firstname = model.Firstname, 
-                    Lastname = model.Lastname, 
-                    Birthday = model.Birthday});
+                user = new User { 
+                    Email = model.Email, 
+                    Password = AuthOptions.GetHashPassword(model.Password),
+                    Info = new UserInfo
+                    {
+                        Firstname = model.Firstname,
+                        Lastname = model.Lastname,
+                        Birthday = model.Birthday
+                    }
+                };
+                db.Add(user);
                 db.SaveChanges();
                 return true;
             }

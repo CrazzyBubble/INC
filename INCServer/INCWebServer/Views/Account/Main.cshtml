@@ -17,7 +17,7 @@
 
 <body>
     <div class="container">
-        <form class="login_form" method="Post" autocomplete="off" action="account/login">
+        <form class="login_form" name="login">
             <div class="flex-center">
                 <div class="header_name">Sign in</div>
                 <a class="register_button effect-shadow">sign up</a>
@@ -31,21 +31,21 @@
                 <input class="password" type="password" name="password" placeholder="password" />
             </div>
             <div class="field_button">
-                <input class="submit_button" type="submit" value="Log in">
+                <input class="submit_button" type="button" value="Log in">
             </div>
         </form>
-        <form class="registration_form hidden" method="Post" autocomplete="off" action="account/register">
+        <form class="register_form hidden" name="register" autocomplete="off">
             <div class="flex-center">
                 <div class="header_name">Sign up</div>
                 <a class="register_button effect-shadow">sign in</a>
             </div>
             <div class="field_content">
                 <i class="fa fa-user image_login_password" aria-hidden="true"></i>
-                <input class="login" name="first_name" placeholder="first name" />
+                <input class="login" name="firstName" placeholder="first name" />
             </div>
             <div class="field_content">
                 <i class="fa fa-user image_login_password" aria-hidden="true"></i>
-                <input class="login" name="second_name" placeholder="second name*" />
+                <input class="login" name="lastName" placeholder="second name*" />
             </div>
             <div class="field_content">
                 <i class="fa fa-envelope image_login_password" aria-hidden="true"></i>
@@ -61,14 +61,16 @@
             </div>
             <div class="field_content">
                 <i class="fa fa-lock image_login_password" aria-hidden="true"></i>
-                <input class="password" type="password" name="confirm_password" placeholder="confirm password" />
+                <input class="password" maxlength="24" type="password" name="confirmPassword" placeholder="confirm password" />
             </div>
             <div class="field_button">
-                <input class="submit_button" type="submit" value="Register">
+                <input class="submit_button" type="button" value="Register">
             </div>
         </form>
     </div>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/login.js"></script>
+    <script src="~/js/ajax_login.js"></script>
 </body>
 </html>
